@@ -4,7 +4,7 @@ using System.Collections;
 public class PinballMovement : MonoBehaviour
 {
 
-    public float speed = 15f;
+    public float speed = 2f;
     public bool beenhit = false;
     public float boomForce = 10f;
     public float boomRadius = 1f;
@@ -30,8 +30,7 @@ public class PinballMovement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        //horizontal = Input.GetAxis("PS4_Horizontal");
-        //vertical = Input.GetAxis("PS4_Vertical");
+        
         boomPosition = GameObject.Find("AttackerEnemy").transform.position;
         boomMultiplier = boomForce * 1000;
 
@@ -92,7 +91,7 @@ public class PinballMovement : MonoBehaviour
         if (horizontal > 0 || horizontal < 0)
         {
 
-            rb.AddForce(horizontal * speed * 1000 * Time.deltaTime, 0, 0);
+            rb.AddForce(horizontal * speed * rb.mass * 500 * Time.deltaTime, 0, 0);
 
         }
 
@@ -100,7 +99,7 @@ public class PinballMovement : MonoBehaviour
         {
 
 
-            rb.AddForce(0, 0, vertical * speed * 1000 * Time.deltaTime);
+            rb.AddForce(0, 0, vertical * speed * rb.mass * 500 * Time.deltaTime);
 
         }
 
