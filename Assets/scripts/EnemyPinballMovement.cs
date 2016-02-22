@@ -122,6 +122,8 @@ public class EnemyPinballMovement : MonoBehaviour
         pointAtCrossHair = Target - transform.position;
         //pointAtCrossHair.y = 0.3f;
 
+
+
         Quaternion turnPlayer = Quaternion.LookRotation(pointAtCrossHair);
 
         rb.MoveRotation(turnPlayer);

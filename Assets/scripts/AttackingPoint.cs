@@ -45,4 +45,16 @@ public class AttackingPoint : MonoBehaviour {
         }
     }
 
+
+    void OnTriggerExit(Collider other)
+    {
+
+        if (other.GetComponent<Collider>().tag == "Player")
+        {
+            inRange = false;
+        }
+
+
+    }
+
 }

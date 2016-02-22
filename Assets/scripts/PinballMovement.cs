@@ -19,11 +19,25 @@ public class PinballMovement : MonoBehaviour
     private float boomMultiplier;
 
 
+
+    Vector3 explosionPos;
+    Collider[] colliders;
+    GameObject[] Enemies;
+
+
     private float timer = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+
+         explosionPos = transform.position;
+
+
+
+
+         colliders = Physics.OverlapSphere(explosionPos, 6);
     }
 
     void FixedUpdate()
@@ -31,13 +45,17 @@ public class PinballMovement : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         
-        boomPosition = GameObject.Find("AttackerEnemy").transform.position;
+        //boomPosition = GameObject.Find("AttackerEnemy").transform.position;
         boomMultiplier = boomForce * 1000;
 
-        if (GameObject.Find("Attacker").GetComponent<AttackingPoint>().inRange == true && GameObject.Find("Attacker").GetComponent<AttackingPoint>().blastSpellFired == true)
-        {
-            beenhit = true;
-        }
+
+
+        /* if (GameObject.Find("Attacker").GetComponent<AttackingPoint>().inRange == true && GameObject.Find("Attacker").GetComponent<AttackingPoint>().blastSpellFired == true)
+         {
+             beenhit = true;
+         }
+
+       */
 
 
 
