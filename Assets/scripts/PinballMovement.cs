@@ -40,6 +40,19 @@ public class PinballMovement : MonoBehaviour
          colliders = Physics.OverlapSphere(explosionPos, 6);
     }
 
+    void Update()
+    {
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+
+            Application.Quit();
+
+        }
+
+
+    }
+
     void FixedUpdate()
     {
         horizontal = Input.GetAxis("Horizontal");
@@ -63,6 +76,7 @@ public class PinballMovement : MonoBehaviour
         if (beenhit == true)
         {
             timer += 1.0f * Time.deltaTime;
+            
             pinballhit();
         }
         else

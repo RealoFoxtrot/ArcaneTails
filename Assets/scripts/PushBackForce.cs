@@ -25,6 +25,44 @@ public class PushBackForce : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        //update positions 
+        colliders = Physics.OverlapSphere(explosionPos, boomRadius);
+        explosionPos = transform.position;
+
+        // player pushback
+        if (Input.GetButton("Fire"))
+        {
+            foreach (Collider hit in Physics.OverlapSphere(transform.position, boomRadius))
+            {
+
+
+                if (hit.attachedRigidbody != null && hit.gameObject.tag == "Attacker")
+                {
+
+                    agent = hit.gameObject.GetComponent<NavMeshAgent>();
+
+
+
+                    agent.updatePosition = false;
+                    agent.updateRotation = false;
+                    
+                    agent.enabled = false;
+                    hit.attachedRigidbody.isKinematic = false;
+                    hit.attachedRigidbody.constraints = RigidbodyConstraints.None;
+
+
+
+
+
+                    hit.attachedRigidbody.AddExplosionForce(2000, explosionPos, boomRadius, 1.0f);
+
+
+
+
+                }
+            }
+
+        }
 
 
 
@@ -33,40 +71,10 @@ public class PushBackForce : MonoBehaviour {
     void FixedUpdate()
     {
 
-        if (Input.GetButton("Fire"))
-        {
-
-            foreach (Collider hit in Physics.OverlapSphere(transform.position, boomRadius))
-            {
-                //Rigidbody rbOther = hit.GetComponent<Rigidbody>();
-                //print(hit.attachedRigidbody.name);
-
-                if (hit.attachedRigidbody != null && hit.gameObject.tag == "Attacker")
-                {
-
-                    print(hit.attachedRigidbody.name);
-                    agent = hit.gameObject.GetComponent<NavMeshAgent>();
-
-                    if (agent.enabled)
-                    {
-                        agent.enabled = false;
-                        agent.updateRotation = false;
-                        agent.updatePosition = false;
-                        hit.attachedRigidbody.isKinematic = false;
-                        hit.attachedRigidbody.constraints = RigidbodyConstraints.None;
-                    }
-                    
-                    
-                    hit.attachedRigidbody.AddExplosionForce(1000, explosionPos, boomRadius, 2.0f);
+      
 
 
-
-                }
-
-
-            }
-
-        }
+        
 
 
 
