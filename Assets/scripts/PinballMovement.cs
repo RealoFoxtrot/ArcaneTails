@@ -5,6 +5,7 @@ public class PinballMovement : MonoBehaviour
 {
 
     public float speed = 2f;
+    public float jumpHeight = 2f;
     public bool beenhit = false;
     public float boomForce = 10f;
     public float boomRadius = 1f;
@@ -17,6 +18,7 @@ public class PinballMovement : MonoBehaviour
     private Vector3 pointAtCrossHair;
     private Vector3 boomPosition;
     private float boomMultiplier;
+    private bool jump;
 
 
 
@@ -57,6 +59,7 @@ public class PinballMovement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+        jump = Input.GetButtonDown("Jump");
         
         //boomPosition = GameObject.Find("AttackerEnemy").transform.position;
         boomMultiplier = boomForce * 1000;
@@ -135,6 +138,10 @@ public class PinballMovement : MonoBehaviour
 
         }
 
+        if (jump == true)
+        {
+            rb.AddForce(0, jumpHeight * 500, 0);
+        }
         turning();
     }
 

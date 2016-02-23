@@ -54,7 +54,7 @@ public class PushBackForce : MonoBehaviour {
 
 
 
-                    hit.attachedRigidbody.AddExplosionForce(2000, explosionPos, boomRadius, 1.0f);
+                    hit.attachedRigidbody.AddExplosionForce(2000, explosionPos, boomRadius, 0.1f);
 
 
 
