@@ -39109,7 +39109,7 @@ GameObject:
   - 33: {fileID: 1717399711}
   - 64: {fileID: 1717399710}
   - 23: {fileID: 1717399709}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: FloorRay
   m_Icon: {fileID: 0}

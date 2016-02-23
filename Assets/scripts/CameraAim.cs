@@ -7,11 +7,14 @@ public class CameraAim : MonoBehaviour {
     public Vector3 hitTransform;
     public GameObject hitCube;
     public GameObject Player;
+    int floorMask;
+
 	// Use this for initialization
 	void Start () {
 
         playerCamera = GetComponent<Camera>();
         hitTransform = new Vector3();
+        floorMask = LayerMask.GetMask("Floor");
     }
 	
 	// Update is called once per frame
@@ -23,15 +26,12 @@ public class CameraAim : MonoBehaviour {
 
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 100, floorMask))
         {
 
-            if (hit.transform.gameObject.tag == "FloorRay")
-            {
 
                 hitTransform = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 
-            }
 
 
         }
