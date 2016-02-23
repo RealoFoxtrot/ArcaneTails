@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Attacker
+  - FloorRay
   layers:
   - Default
   - TransparentFX

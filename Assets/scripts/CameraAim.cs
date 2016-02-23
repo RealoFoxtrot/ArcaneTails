@@ -26,7 +26,7 @@ public class CameraAim : MonoBehaviour {
         if (Physics.Raycast(ray, out hit))
         {
 
-            if (hit.transform.gameObject.tag == "Floor")
+            if (hit.transform.gameObject.tag == "FloorRay")
             {
 
                 hitTransform = new Vector3(hit.point.x, hit.point.y, hit.point.z);

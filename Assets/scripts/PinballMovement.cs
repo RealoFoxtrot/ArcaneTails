@@ -9,6 +9,7 @@ public class PinballMovement : MonoBehaviour
     public bool beenhit = false;
     public float boomForce = 10f;
     public float boomRadius = 1f;
+    public Transform Floor;
 
     private Rigidbody rb;
     private float horizontal;
@@ -19,6 +20,8 @@ public class PinballMovement : MonoBehaviour
     private Vector3 boomPosition;
     private float boomMultiplier;
     private bool jump;
+
+    public bool CanJump;
 
 
 
@@ -38,8 +41,9 @@ public class PinballMovement : MonoBehaviour
 
 
 
-
+        CanJump = false;
          colliders = Physics.OverlapSphere(explosionPos, 6);
+         Physics.IgnoreCollision(Floor.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
     void Update()
@@ -138,9 +142,9 @@ public class PinballMovement : MonoBehaviour
 
         }
 
-        if (jump == true)
+        if (jump == true && CanJump)
         {
-            rb.AddForce(0, jumpHeight * 500, 0);
+            rb.AddForce(0, jumpHeight * 1000, 0);
         }
         turning();
     }
@@ -158,6 +162,32 @@ public class PinballMovement : MonoBehaviour
         Quaternion turnPlayer = Quaternion.LookRotation(pointAtCrossHair);
 
         rb.MoveRotation(turnPlayer);
+    }
+
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Floor")
+        {
+
+            CanJump = true;
+
+        }
+
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+
+        if (col.gameObject.tag == "Floor")
+        {
+
+            CanJump = false;
+
+        }
+
+
+
     }
 
 }
