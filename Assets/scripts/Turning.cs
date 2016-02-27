@@ -9,10 +9,12 @@ public class Turning : MonoBehaviour {
     private Vector3 crossHair;
     private Vector3 pointAtCrossHair;
 
+    public GameObject Camera;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
-
+        
 
     }
 	
@@ -29,7 +31,7 @@ public class Turning : MonoBehaviour {
         else
         {
             //get the location of the crosshair from the script in the camera
-            crossHair = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraAim>().hitTransform;
+            crossHair = Camera.GetComponent<CameraAim>().hitTransform;
 
             //create a vector between the crosshair and the player
             pointAtCrossHair = crossHair - transform.position;
@@ -37,7 +39,7 @@ public class Turning : MonoBehaviour {
 
             Quaternion turnPlayer = Quaternion.LookRotation(pointAtCrossHair);
 
-            rb.MoveRotation(turnPlayer);
+           // rb.MoveRotation(turnPlayer);
         }
 
 	}

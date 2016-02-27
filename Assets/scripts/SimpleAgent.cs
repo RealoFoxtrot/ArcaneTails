@@ -8,8 +8,15 @@ public class SimpleAgent : MonoBehaviour {
     Rigidbody rb;
     Collider col;
     public Transform Floor;
+    GameObject HitObject;
 
+
+    
+    private float boomForce = 1000;
+    public float boomRadius = 2f;
+    public GameObject BoomPos;
     float timer = 0;
+    float hitTimer = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +29,17 @@ public class SimpleAgent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
 
+        // Timer countdown to the AI hitting the player.
+        hitTimer += 1 * Time.deltaTime;
+        if (hitTimer > 5) // every 5 seconds
+        {
+            HitPlayer();
+            hitTimer = 0;
+        }
+        
+            
+        
         
 
 
@@ -86,4 +102,38 @@ public class SimpleAgent : MonoBehaviour {
 
 
     }
+
+   
+
+    void HitPlayer()
+    {
+
+
+        foreach (Collider hit in Physics.OverlapSphere(BoomPos.transform.position, boomRadius))
+        {
+
+
+
+            if (hit.attachedRigidbody != null && hit.gameObject.tag == "Player") // if it is the player, then hit.
+            {
+                print("Hitting Player");
+                HitObject = hit.gameObject;
+
+                HitObject.GetComponent<PinballMovement>().beenhit = true;
+                hit.attachedRigidbody.constraints = RigidbodyConstraints.None;
+                hit.attachedRigidbody.AddExplosionForce(boomForce * hit.attachedRigidbody.mass, BoomPos.transform.position, boomRadius, 0.1f);
+
+            }
+
+          
+        }
+
+
+
+
+
+    }
+
+
+    
 }

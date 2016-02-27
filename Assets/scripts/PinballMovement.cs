@@ -16,13 +16,15 @@ public class PinballMovement : MonoBehaviour
     private float vertical;
     private Vector3 movement;
     private Vector3 cameraLocation;
-    private Vector3 Camera;
+    private Vector3 LookLocation;
+    
     private Vector3 pointAtCamera;
     private Vector3 boomPosition;
     private float boomMultiplier;
     private bool jump;
 
     public bool CanJump;
+    public GameObject Camera;
 
 
 
@@ -66,7 +68,7 @@ public class PinballMovement : MonoBehaviour
         vertical = Input.GetAxis("Vertical");
         jump = Input.GetButtonDown("Jump");
         
-        //boomPosition = GameObject.Find("AttackerEnemy").transform.position;
+        
         boomMultiplier = boomForce * 1000;
 
 
@@ -98,7 +100,7 @@ public class PinballMovement : MonoBehaviour
     void pinballhit()
     {
         rb.constraints = RigidbodyConstraints.None;
-        rb.AddExplosionForce(boomMultiplier, boomPosition, boomRadius, 0.1f);
+        //rb.AddExplosionForce(boomMultiplier, boomPosition, boomRadius, 0.1f);
     }
 
     //Tony's physics based movement converted to Elina's game - not used DELETE
@@ -107,15 +109,15 @@ public class PinballMovement : MonoBehaviour
         if (horizontal != 0)
         {
 
-            rb.AddRelativeForce(horizontal * speed * rb.mass * -500 * Time.deltaTime, 0, 0);
-
+           // rb.AddRelativeForce(horizontal * speed * rb.mass * -500 * Time.deltaTime, 0, 0);
+            rb.AddRelativeForce(horizontal * speed * rb.mass * 500 * Time.deltaTime, 0, 0);
         }
 
         if (vertical != 0)
         {
 
-            rb.AddRelativeForce(0, 0, vertical * speed * rb.mass * -500 * Time.deltaTime);
-
+          //  rb.AddRelativeForce(0, 0, vertical * speed * rb.mass * -500 * Time.deltaTime);
+            rb.AddRelativeForce(0, 0, vertical * speed * rb.mass * 500 * Time.deltaTime);
         }
 
         if (jump == true && CanJump)
@@ -130,11 +132,11 @@ public class PinballMovement : MonoBehaviour
     void parentturning()
     {
         //get the location of the camera
-        cameraLocation = GameObject.Find("Camera").transform.position;
+        LookLocation = Camera.GetComponent<CameraAim>().hitTransform;
         cameraLocation.y = transform.position.y;
 
         //create a vector between the crosshair and the player
-        pointAtCamera = cameraLocation - transform.position;
+        pointAtCamera = LookLocation - transform.position;
         //pointAtCrossHair.y = 0.3f;
 
         Quaternion turnPlayer = Quaternion.LookRotation(pointAtCamera);

@@ -16,13 +16,13 @@ public class EnemyPinballMovement : MonoBehaviour
 
     private Vector3 Target;
 
-
+    private bool IsHitting;
     private Vector3 pointAtCrossHair;
     private Vector3 boomPosition;
     private float boomMultiplier;
 
 
-    public GameObject Player;
+    public GameObject HitObject;
 
 
     private float timer = 0;
@@ -34,18 +34,12 @@ public class EnemyPinballMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //horizontal = Input.GetAxis("Horizontal");
-        //vertical = Input.GetAxis("Vertical");
-        //horizontal = Input.GetAxis("PS4_Horizontal");
-        //vertical = Input.GetAxis("PS4_Vertical");
         boomPosition = GameObject.Find("Attacker").transform.position;
         boomMultiplier = boomForce * 1000;
 
-        /* if (GameObject.FindGameObjectWithTag("Attacker").GetComponent<AttackingPoint>().inRange == true && GameObject.FindGameObjectWithTag("Attacker").GetComponent<AttackingPoint>().blastSpellFired == true)
-         {
-             beenhit = true;
-         }*/
+       
 
+        
 
 
         // swap between world control and physics pinball
@@ -66,6 +60,12 @@ public class EnemyPinballMovement : MonoBehaviour
 
             beenhit = false;
         }
+
+    }
+
+    void Update()
+    {
+        
 
     }
 
@@ -129,4 +129,9 @@ public class EnemyPinballMovement : MonoBehaviour
         rb.MoveRotation(turnPlayer);
     }
 
+
+    
+
+
+    
 }
