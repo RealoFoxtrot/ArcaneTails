@@ -186,6 +186,22 @@ Prefab:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 13533572, guid: 0c9b1001f2b917d41998fd31e3b4c0a3, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13533572, guid: 0c9b1001f2b917d41998fd31e3b4c0a3, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13552896, guid: 0c9b1001f2b917d41998fd31e3b4c0a3, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13552896, guid: 0c9b1001f2b917d41998fd31e3b4c0a3, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11474892, guid: 0c9b1001f2b917d41998fd31e3b4c0a3, type: 2}
     - {fileID: 14370426, guid: 0c9b1001f2b917d41998fd31e3b4c0a3, type: 2}
