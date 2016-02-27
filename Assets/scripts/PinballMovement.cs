@@ -15,8 +15,9 @@ public class PinballMovement : MonoBehaviour
     private float horizontal;
     private float vertical;
     private Vector3 movement;
-    private Vector3 crossHair;
-    private Vector3 pointAtCrossHair;
+    private Vector3 cameraLocation;
+    private Vector3 Camera;
+    private Vector3 pointAtCamera;
     private Vector3 boomPosition;
     private float boomMultiplier;
     private bool jump;
@@ -70,14 +71,6 @@ public class PinballMovement : MonoBehaviour
 
 
 
-        /* if (GameObject.Find("Attacker").GetComponent<AttackingPoint>().inRange == true && GameObject.Find("Attacker").GetComponent<AttackingPoint>().blastSpellFired == true)
-         {
-             beenhit = true;
-         }
-
-       */
-
-
 
         // swap between world control and physics pinball
         if (beenhit == true)
@@ -88,9 +81,9 @@ public class PinballMovement : MonoBehaviour
         }
         else
         {
-            //pinballcontrol(horizontal, vertical);
             timer = 0;
             physicsPinballControl();
+
         }
 
         if (timer >= 2)
@@ -108,37 +101,20 @@ public class PinballMovement : MonoBehaviour
         rb.AddExplosionForce(boomMultiplier, boomPosition, boomRadius, 0.1f);
     }
 
-    //World Co-Ordinate Controlled Movement
-    void pinballcontrol(float horizontal, float vertical)
-    {
-        // Set the movement vector based on the axis input.
-        movement.Set(horizontal, 0f, vertical);
-
-        // Normalise the movement vector and make it proportional to the speed per second.
-        movement = movement.normalized * speed * Time.deltaTime;
-
-        // Move the player to it's current position plus the movement.
-        rb.MovePosition(transform.position + movement);
-
-        //turn the player towards the crosshair
-        turning();
-    }
-
-    //Tony's physics based movement converted to Elina's game
+    //Tony's physics based movement converted to Elina's game - not used DELETE
     void physicsPinballControl()
     {
-        if (horizontal > 0 || horizontal < 0)
+        if (horizontal != 0)
         {
 
-            rb.AddForce(horizontal * speed * rb.mass * 500 * Time.deltaTime, 0, 0);
+            rb.AddRelativeForce(horizontal * speed * rb.mass * -500 * Time.deltaTime, 0, 0);
 
         }
 
-        if (vertical > 0 || vertical < 0)
+        if (vertical != 0)
         {
 
-
-            rb.AddForce(0, 0, vertical * speed * rb.mass * 500 * Time.deltaTime);
+            rb.AddRelativeForce(0, 0, vertical * speed * rb.mass * -500 * Time.deltaTime);
 
         }
 
@@ -146,20 +122,22 @@ public class PinballMovement : MonoBehaviour
         {
             rb.AddForce(0, jumpHeight * 1000, 0);
         }
-        turning();
+        parentturning();
     }
 
+ 
 
-    void turning()
+    void parentturning()
     {
-        //get the location of the crosshair from the script in the camera
-        crossHair = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraAim>().hitTransform;
+        //get the location of the camera
+        cameraLocation = GameObject.Find("Camera").transform.position;
+        cameraLocation.y = transform.position.y;
 
         //create a vector between the crosshair and the player
-        pointAtCrossHair = crossHair - transform.position;
+        pointAtCamera = cameraLocation - transform.position;
         //pointAtCrossHair.y = 0.3f;
 
-        Quaternion turnPlayer = Quaternion.LookRotation(pointAtCrossHair);
+        Quaternion turnPlayer = Quaternion.LookRotation(pointAtCamera);
 
         rb.MoveRotation(turnPlayer);
     }
