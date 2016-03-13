@@ -109,15 +109,13 @@ public class PinballMovement : MonoBehaviour
         if (horizontal != 0)
         {
 
-           // rb.AddRelativeForce(horizontal * speed * rb.mass * -500 * Time.deltaTime, 0, 0);
-            rb.AddRelativeForce(horizontal * speed * rb.mass * 500 * Time.deltaTime, 0, 0);
+            rb.AddRelativeForce(horizontal * speed * rb.mass * -500 * Time.deltaTime, 0, 0);
         }
 
         if (vertical != 0)
         {
 
-          //  rb.AddRelativeForce(0, 0, vertical * speed * rb.mass * -500 * Time.deltaTime);
-            rb.AddRelativeForce(0, 0, vertical * speed * rb.mass * 500 * Time.deltaTime);
+            rb.AddRelativeForce(0, 0, vertical * speed * rb.mass * -500 * Time.deltaTime);
         }
 
         if (jump == true && CanJump)
