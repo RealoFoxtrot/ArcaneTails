@@ -35,8 +35,16 @@ public class CameraAim : MonoBehaviour {
 
 
         }
+        float x = Input.mousePosition.x / 2;
+        float y = Input.mousePosition.y / 2;
+       
 
-       // make the object appear at the hit point.
+        //make camera move with mouse for a bit.
+
+
+
+        // make the object appear at the hit point.
+        //transform.rotation = Quaternion.Euler(y, x, 0);
         hitCube.transform.position = hitTransform;
       
 

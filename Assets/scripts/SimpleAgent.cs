@@ -24,8 +24,11 @@ public class SimpleAgent : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         rb = GetComponent<Rigidbody>();
-        Physics.IgnoreCollision(Floor.GetComponent<Collider>(), GetComponent<Collider>());
-    }
+        if (Floor)
+        {
+            Physics.IgnoreCollision(Floor.GetComponent<Collider>(), GetComponent<Collider>());
+        }
+     }
 	
 	// Update is called once per frame
 	void Update () {

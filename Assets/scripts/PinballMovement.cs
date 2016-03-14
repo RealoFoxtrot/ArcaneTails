@@ -31,6 +31,7 @@ public class PinballMovement : MonoBehaviour
     Vector3 explosionPos;
     Collider[] colliders;
     GameObject[] Enemies;
+   public Collider[] IgnoreColliders;
 
 
     private float timer = 0;
@@ -46,7 +47,21 @@ public class PinballMovement : MonoBehaviour
 
         CanJump = false;
          colliders = Physics.OverlapSphere(explosionPos, 6);
-         Physics.IgnoreCollision(Floor.GetComponent<Collider>(), GetComponent<Collider>());
+        //Physics.IgnoreCollision(Floor.GetComponent<Collider>(), GetComponent<Collider>());
+
+        //work around for layer based colliders clashing with raycasting.
+        if (IgnoreColliders.Length > 0)
+        {
+            for (int i = 0; i < IgnoreColliders.Length; i++)
+            {
+
+                Physics.IgnoreCollision(IgnoreColliders[i], GetComponent<Collider>());
+
+            }
+        }
+
+
+       // Physics.IgnoreLayerCollision(0, 9);
     }
 
     void Update()
@@ -122,7 +137,7 @@ public class PinballMovement : MonoBehaviour
 
         if (jump == true && CanJump)
         {
-            rb.AddForce(0, jumpHeight * 1000, 0);
+            rb.AddForce(0, jumpHeight * 10000, 0);
         }
         parentturning();
     }
